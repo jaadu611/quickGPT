@@ -1,0 +1,10 @@
+  - type: web
+    name: my-frontend
+    env: static
+    root: client
+    buildCommand: npm install && npm run build
+    staticPublishPath: build
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
