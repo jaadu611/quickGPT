@@ -6,7 +6,7 @@ import { assets } from "./assets/assets.js";
 import "./assets/prism.css";
 import Loading from "./pages/Loading.jsx";
 import { useAppContext } from "./context/AppContext.jsx";
-import Login from "./pages/login.jsx";
+import Login from "./pages/Login.jsx";
 import { Toaster } from "react-hot-toast";
 
 const App = () => {
