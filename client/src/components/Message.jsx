@@ -4,7 +4,7 @@ import moment from "moment";
 import Markdown from "react-markdown";
 import Prism from "prismjs";
 
-const Message = ({ message, onCopyCode }) => {
+const Message = ({ message }) => {
   useEffect(() => {
     Prism.highlightAll();
   }, [message.content]);
