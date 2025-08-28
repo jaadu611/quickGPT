@@ -1,6 +1,6 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Sidebar from "./components/Sidebar.jsx";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ChatBox from "./components/ChatBox.jsx";
 import { assets } from "./assets/assets.js";
 import "./assets/prism.css";
@@ -11,7 +11,16 @@ import { Toaster } from "react-hot-toast";
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [appHeight, setAppHeight] = useState(window.innerHeight);
   const { user, loadingUser } = useAppContext();
+
+  // Update height on resize
+  useEffect(() => {
+    const handleResize = () => setAppHeight(window.innerHeight);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   if (loadingUser) return <Loading />;
 
   return (
@@ -25,8 +34,11 @@ const App = () => {
         />
       )}
       {user ? (
-        <div className="dark:bg-gradient-to-b from-[#242124] to-[#000000] dark:text-white">
-          <div className="flex h-screen w-screen">
+        <div
+          className="dark:bg-gradient-to-b from-[#242124] to-[#000000] dark:text-white"
+          style={{ height: appHeight }}
+        >
+          <div className="flex" style={{ height: appHeight }}>
             <Sidebar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
             <Routes>
               <Route path="/" element={<ChatBox />} />
@@ -34,7 +46,10 @@ const App = () => {
           </div>
         </div>
       ) : (
-        <div className="bg-gradient-to-b from-[#242124] to-[#000000] flex items-center justify-center h-screen w-screen">
+        <div
+          className="bg-gradient-to-b from-[#242124] to-[#000000] flex items-center justify-center"
+          style={{ height: appHeight }}
+        >
           <Login />
         </div>
       )}
