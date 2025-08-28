@@ -97,9 +97,14 @@ pre::-webkit-scrollbar-thumb:hover {
   background: #4c4c50;
 }
 
-html,
-body {
+html, body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  background-color: white;
 }
+
+#root {
+  min-height: 100dvh; /* ensures app always fills viewport */
+}
+
